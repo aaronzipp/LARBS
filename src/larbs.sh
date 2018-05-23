@@ -43,7 +43,7 @@ dialog --infobox "Refreshing Arch Keyring..." 4 40
 pacman --noconfirm -Sy archlinux-keyring >/dev/tty6
 
 dialog --infobox "Getting program list..." 4 40
-curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/progs.csv > /tmp/progs.csv
+curl https://raw.githubusercontent.com/aaronzipp/larbs/master/src/progs.csv > /tmp/progs.csv
 rm /tmp/aur_queue &>/dev/tty6
 count=$(cat /tmp/progs.csv | grep -G ",$let," | wc -l)
 n=0

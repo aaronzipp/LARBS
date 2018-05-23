@@ -3,20 +3,20 @@
 pacman -S --noconfirm --needed dialog || { echo "Error at script start: Are you sure you're running this as the root user? Are you sure you're using an Arch-based distro? ;-) Are you sure you have an internet connection?"; exit; }
 dialog --title "Welcome!" --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\n\nThis script will automatically install a fully-featured i3wm Arch Linux desktop, which I use as my main machine.\n\n-Luke" 10 60
 
-name=$(dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 3>&1 1>&2 2>&3 3>&1)
-pass1=$(dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 3>&1 1>&2 2>&3 3>&1)
-pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
+# name=$(dialog --no-cancel --inputbox "First, please enter a name for the user account." 10 60 3>&1 1>&2 2>&3 3>&1)
+# pass1=$(dialog --no-cancel --passwordbox "Enter a password for that user." 10 60 3>&1 1>&2 2>&3 3>&1)
+# pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
 
-while [ $pass1 != $pass2 ]
-do
-	pass1=$(dialog --no-cancel --passwordbox "Passwords do not match.\n\nEnter password again." 10 60 3>&1 1>&2 2>&3 3>&1)
-	pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
-	unset pass2
-done
+# while [ $pass1 != $pass2 ]
+# do
+# 	pass1=$(dialog --no-cancel --passwordbox "Passwords do not match.\n\nEnter password again." 10 60 3>&1 1>&2 2>&3 3>&1)
+# 	pass2=$(dialog --no-cancel --passwordbox "Retype password." 10 60 3>&1 1>&2 2>&3 3>&1)
+# 	unset pass2
+# done
 
-dialog --infobox "Adding user \"$name\"..." 4 50
-useradd -m -g wheel -s /bin/bash $name >/dev/tty6
-echo "$name:$pass1" | chpasswd >/dev/tty6
+# dialog --infobox "Adding user \"$name\"..." 4 50
+# useradd -m -g wheel -s /bin/bash $name >/dev/tty6
+# echo "$name:$pass1" | chpasswd >/dev/tty6
 
 cmd=(dialog --separate-output --nocancel  --buildlist "Press <SPACE> to select the packages you want to install. LARBS will install all the packages you put in the right column.
 
@@ -63,7 +63,7 @@ if [ $1 = "devel" ]
 then curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/devel/src/larbs_user.sh > /tmp/larbs_user.sh;
 else curl https://raw.githubusercontent.com/LukeSmithxyz/larbs/master/src/larbs_user.sh > /tmp/larbs_user.sh;
 fi
-sudo -u $name bash /tmp/larbs_user.sh
+sudo -u aaron bash /tmp/larbs_user.sh
 rm -f /tmp/larbs_user.sh
 
 dialog --infobox "Installing \"st\" from source..." 4 40
